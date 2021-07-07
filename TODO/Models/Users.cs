@@ -20,12 +20,17 @@ namespace TODO.Models
             this.password = password;
         }
 
-        public Users(int uid, string userName, string password)
+        public Users(int uid, string userName)
         {
             this.uid = uid;
             this.userName = userName;
-            this.password = password;
-        }       
+        }
+
+        public Users(int uid)
+        {
+            this.uid = uid;            
+        }
+
 
         public DataTable listUsers()
         {                       
@@ -36,7 +41,7 @@ namespace TODO.Models
             sda.Fill(dt);
             return dt;            
         }
-
+        
         public void addUser(Users user)
         {
             string query = @"Insert into Users (userName,password) values(@userName, @password)";
@@ -47,6 +52,29 @@ namespace TODO.Models
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-        }        
+        }    
+        
+        public void updateUser(Users user)
+        {
+            string query = @"Update Users set userName = @userName where uid = @uid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.Add("@userName", MySqlDbType.VarChar, 500).Value = user.userName;
+            cmd.Parameters.Add("@uid", MySqlDbType.Int32, sizeof(Int32)).Value = user.uid;
+            cmd.CommandType = CommandType.Text;
+            MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+        }
+
+        public void deleteUser(Users user)
+        {
+            string query = @"Delete from Users where uid = @uid";
+            MySqlCommand cmd = new MySqlCommand(query, con);           
+            cmd.Parameters.Add("@uid", MySqlDbType.Int32, sizeof(Int32)).Value = user.uid;
+            cmd.CommandType = CommandType.Text;
+            MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+        }
     }
 }

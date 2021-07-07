@@ -24,7 +24,7 @@ namespace TODO.Controllers
             }
         }
 
-        public string post(Users userData)
+        public string Post(Users userData)
         {
             try
             {
@@ -32,6 +32,30 @@ namespace TODO.Controllers
                 return "Data Added successfully !!";
             }catch(Exception e){
                 return "Failed to insert data: Exception :" + e;
+            }
+        }
+
+        public string Put(Users userData)
+        {
+            try
+            {
+                user.updateUser(userData);
+                return "Update Data successfull";
+            }catch(Exception e)
+            {
+                return "Failed to Update data: Exception :" + e;
+            }
+        }
+
+        public string Delete(Users userData)
+        {
+            try
+            {
+                user.deleteUser(userData);
+                return "User Deleted Successfully";
+            }catch(Exception e)
+            {
+                return "Delete Failed";
             }
         }
     }    
