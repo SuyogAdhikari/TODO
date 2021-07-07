@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using MySql.Data.MySqlClient;
+using System.Net.Http.Headers;
 
 namespace TODO
 {
@@ -27,6 +28,8 @@ namespace TODO
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+
         }
     }
 }
