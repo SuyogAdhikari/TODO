@@ -10,7 +10,7 @@ namespace TODO.Controllers
 {
     public class UsersController : ApiController
     {
-        Users user = new Users();
+        Users user = new Users();        
         public HttpResponseMessage Get()
         {            
             DataTable dt = new DataTable();
@@ -20,6 +20,18 @@ namespace TODO.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK,dt);
             }
             catch(Exception e) {
+                return Request.CreateErrorResponse(HttpStatusCode.OK, e);
+            }
+        }
+
+        public HttpResponseMessage Get(int id) {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = user.userInformation(id);
+                return Request.CreateResponse(HttpStatusCode.OK, dt);
+            }catch(Exception e)
+            {
                 return Request.CreateErrorResponse(HttpStatusCode.OK, e);
             }
         }
