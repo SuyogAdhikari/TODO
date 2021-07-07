@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MySql.Data.MySqlClient;
+using TODO.App_Start;
 
 namespace TODO.Controllers
 {
@@ -13,7 +14,7 @@ namespace TODO.Controllers
         // GET: TasksHead
         public HttpResponseMessage Get()
         {
-            MySqlConnection connection = WebApiConfig.conn();
+            MySqlConnection connection = DBconnector.conn();
             string query = @"SELECT * from TasksHead";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.CommandType = CommandType.Text;
