@@ -6,22 +6,62 @@ using System.Net.Http;
 using System.Web.Http;
 using MySql.Data.MySqlClient;
 using TODO.App_Start;
+using TODO.Models;
 
 namespace TODO.Controllers
 {
     public class TasksHeadController : ApiController
     {
+        TasksHead task = new TasksHead();
         // GET: TasksHead
         public HttpResponseMessage Get()
         {
-            MySqlConnection connection = DBconnector.conn();
-            string query = @"SELECT * from TasksHead";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.CommandType = CommandType.Text;
-            MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            adapter.Fill(dt);
+            try
+            {
+                dt = task.listTasks();
+            }catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.OK, e);
+            }
             return Request.CreateResponse(HttpStatusCode.OK, dt);
+        }
+
+        public string Post(TasksHead taskData)
+        {
+            try
+            {
+                task.addTask(taskData);
+                return "Task added Successfully";
+            }catch(Exception e)
+            {
+                return "Task addition failed. Exception : " + e ;
+            }
+        }
+
+        public string Put(TasksHead taskData)
+        {
+            try
+            {
+                task.updateTaskName(taskData);
+                return ("Task updated Successfully");
+            }catch(Exception e)
+            {
+                return ("Task update failed. Exception : " + e);
+            }
+        }
+
+        public string Put(int taskId, bool isCompleted)
+        {
+            try
+            {
+                task.taskDone(taskId, isCompleted);
+                return ("isCompleted updated Successfully");
+            }
+            catch (Exception e)
+            {
+                return ("isCompleted update failed. Exception : " + e);
+            }
         }
     }
 }

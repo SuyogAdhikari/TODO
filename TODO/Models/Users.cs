@@ -59,7 +59,7 @@ namespace TODO.Models
             string query = @"Update Users set userName = @userName where uid = @uid";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.Add("@userName", MySqlDbType.VarChar, 500).Value = user.userName;
-            cmd.Parameters.Add("@uid", MySqlDbType.Int32, sizeof(Int32)).Value = user.uid;
+            cmd.Parameters.Add("@uid", MySqlDbType.Int32).Value = user.uid;
             cmd.CommandType = CommandType.Text;
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -70,7 +70,7 @@ namespace TODO.Models
         {
             string query = @"Delete from Users where uid = @uid";
             MySqlCommand cmd = new MySqlCommand(query, con);           
-            cmd.Parameters.Add("@uid", MySqlDbType.Int32, sizeof(Int32)).Value = user.uid;
+            cmd.Parameters.Add("@uid", MySqlDbType.Int32).Value = user.uid;
             cmd.CommandType = CommandType.Text;
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -81,7 +81,7 @@ namespace TODO.Models
         {
             string query = @"SELECT uid, userName FROM Users where uid = @uid";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.Add("@uid", MySqlDbType.Int32, sizeof(Int32)).Value = uid;
+            cmd.Parameters.Add("@uid", MySqlDbType.Int32).Value = uid;
             cmd.CommandType = CommandType.Text;
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();

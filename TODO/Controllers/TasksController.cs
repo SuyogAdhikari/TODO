@@ -1,23 +1,64 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using MySql.Data.MySqlClient;
-using TODO.App_Start;
+using TODO.Models;
 
 namespace TODO.Controllers
 {
     public class TasksController : ApiController
     {
+        Tasks tasks = new Tasks();
         public HttpResponseMessage Get()
         {
-            MySqlConnection connection = DBconnector.conn();
-            string query = @"SELECT * FROM Tasks";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            return Request.CreateResponse(HttpStatusCode.OK, dt);
+            try
+            {
+                dt = tasks.listTasks();
+                return Request.CreateResponse(HttpStatusCode.OK, dt);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.OK, e);
+            }
         }    
+
+        public string Post(Tasks taskData)
+        {
+            try
+            {
+                tasks.addTask(taskData);
+                return "Task added successfully";
+            }catch(Exception e)
+            {
+                return "Failed to add data " + e;
+            }
+        }
+
+        public string Put(Tasks taskData)
+        {
+            try
+            {
+                tasks.updateTask(taskData);
+                return "Task updated successfully";
+            }catch(Exception e)
+            {
+                return "Task Updated failed, Exception : " + e;
+            }
+        }
+
+        public string Delete(Tasks taskData)
+        {
+            try
+            {
+                tasks.deleteTasks(taskData);
+                return "Task successfully deleted";
+            }
+            catch(Exception e)
+            {
+                return "Task deletion failed, Exception: " + e; 
+            }
+        }
     }
 }
