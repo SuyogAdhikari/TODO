@@ -96,3 +96,6 @@ C:\44\Projects\TODO\TODO\obj\Debug\TODO.csproj.CoreCompileInputs.cache
 C:\44\Projects\TODO\TODO\obj\Debug\TODO.csproj.CopyComplete
 C:\44\Projects\TODO\TODO\obj\Debug\TODO.dll
 C:\44\Projects\TODO\TODO\obj\Debug\TODO.pdb
+C:\44\Projects\TODO\TODO\bin\System.Web.Cors.dll
+C:\44\Projects\TODO\TODO\bin\System.Web.Http.Cors.dll
+C:\44\Projects\TODO\TODO\bin\System.Web.Http.Cors.xml

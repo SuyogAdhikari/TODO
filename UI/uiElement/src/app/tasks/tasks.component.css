@@ -1,0 +1,45 @@
+.wrapper {    
+    /*This part is important for centering*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .typing-demo {
+    width: 22ch;
+    animation: typing 2s steps(22), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 2em;
+    color: white;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0
+    }
+  }
+      
+  @keyframes blink {
+    50% {
+      border-color: transparent
+    }
+  }
+
+
+  /* CARD */
+  .heading{
+      font-weight: bold;
+  }
+
+  .task :hover{
+      background-color: rgb(226, 222, 218);
+      transition: 0.5s;
+      border-radius: 10%;      
+  }
+  
+
+
