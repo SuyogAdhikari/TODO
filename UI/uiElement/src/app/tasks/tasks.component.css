@@ -36,7 +36,7 @@
   }
 
   .task :hover{
-      background-color: rgb(226, 222, 218);
+      background-color: rgb(231, 231, 231);
       transition: 0.5s;
       border-radius: 10%;      
   }

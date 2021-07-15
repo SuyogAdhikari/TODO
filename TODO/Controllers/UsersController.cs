@@ -67,7 +67,7 @@ namespace TODO.Controllers
                 return "User Deleted Successfully";
             }catch(Exception e)
             {
-                return "Delete Failed";
+                return "Delete Failed :  " + e;
             }
         }
     }    

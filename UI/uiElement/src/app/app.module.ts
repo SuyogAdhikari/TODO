@@ -8,6 +8,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { FormsModule }   from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SignupComponent } from './signup/signup.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

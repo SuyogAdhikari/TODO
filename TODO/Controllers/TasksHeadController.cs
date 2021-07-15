@@ -51,17 +51,19 @@ namespace TODO.Controllers
             }
         }
 
-        public string Put(int taskId, bool isCompleted)
+        public string Delete(int Id)
         {
             try
             {
-                task.taskDone(taskId, isCompleted);
-                return ("isCompleted updated Successfully");
+                TasksHead taskData = new TasksHead(Id);
+                task.deleteTask(taskData);
+                return ("Task deleted");
             }
             catch (Exception e)
             {
-                return ("isCompleted update failed. Exception : " + e);
+                return ("Delete Failed : " + e);
             }
         }
+        
     }
 }

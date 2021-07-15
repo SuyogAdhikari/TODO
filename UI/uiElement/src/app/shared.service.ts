@@ -14,16 +14,15 @@ export class SharedService {
     return this.http.get(this.baseApi + 'taskshead'); 
   }
 
-  postTasks(){
-    
+  // uid, taskname, isCompleted
+  postTask(taskData){
+    console.log(taskData);
+    return this.http.post(this.baseApi + 'taskshead', taskData)
   }
 
-  putTasks(){
-
+  deleteTask(taskId){
+    console.log("On services");
+    //console.log(taskId);
+    return this.http.delete(this.baseApi+'taskshead/'+ taskId)
   }
-
-  deleteTasks(){
-
-  }
-
 }

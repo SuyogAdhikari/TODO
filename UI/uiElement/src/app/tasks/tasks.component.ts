@@ -7,13 +7,33 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-  taskshead : Object;
+  taskhead : Object; 
   constructor(private _http : SharedService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.viewTasks();
+  }
+
+  viewTasks(){
     this._http.getTasks().subscribe(data => {
-      this.taskshead = data;
-      console.log(this.taskshead);
+     console.log(data);
+      this.taskhead = data;
+      // console.log(this.taskshead);
+    })
+  }
+
+  addTask(taskhead){
+    console.log(taskhead);
+    this._http.postTask(taskhead).subscribe(data =>{
+      this.viewTasks();
+      console.log("TaskHead from TaskComponent : " + taskhead);      
+    });
+  }  
+
+  removeTask(taskhead){
+    console.log(taskhead);
+    this._http.deleteTask(taskhead.tasksNameId).subscribe(data=>{
+      this.viewTasks();
     })
   }
 }

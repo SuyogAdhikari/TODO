@@ -53,7 +53,8 @@ namespace TODO.Models
 
         public DataTable listTasks()
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT tasksNameId, taskname, isCompleted FROM TasksHead", con);
+            MySqlCommand cmd = new MySqlCommand("SELECT tasksNameId, userName, taskname, isCompleted FROM TasksHead inner join Users on TasksHead.uid = Users.uid", con);
+
             cmd.CommandType = CommandType.Text;
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -71,6 +72,7 @@ namespace TODO.Models
             cmd.Parameters.Add("@isCompleted", MySqlDbType.UInt64).Value = task.isCompleted;
 
             cmd.CommandType = CommandType.Text;
+            Console.WriteLine(query);
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -93,12 +95,13 @@ namespace TODO.Models
 
         public void deleteTask(TasksHead task)
         {
-            string query = @"Delete from TasksHead where taskId = @tasksNameId";
+            string query = @"Delete from taskshead where tasksNameId = @tasksNameId";
             MySqlCommand cmd = new MySqlCommand(query, con);
 
             cmd.Parameters.Add("@tasksNameId", MySqlDbType.Int32).Value = task.tasksNameId;
 
             cmd.CommandType = CommandType.Text;
+            Console.WriteLine(task.tasksNameId);
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
